@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Circle of En</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bone:       #FAF8F4;
+      --cream:      #F5F0E8;
+      --charcoal:   #2C2825;
+      --graphite:   #4A4540;
+      --muted:      #8A837C;
+      --terracotta: #C07856;
+      --divider:    rgba(44,40,37,0.10);
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+      --script:     'Pinyon Script', cursive;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bone);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9998;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 8s steps(10) infinite;
+    }
+    @keyframes grain {
+      0%,100% { transform: translate(0,0); }
+      10% { transform: translate(-5%,-10%); }
+      20% { transform: translate(-15%,5%); }
+      30% { transform: translate(7%,-25%); }
+      40% { transform: translate(-5%,25%); }
+      50% { transform: translate(-15%,10%); }
+      60% { transform: translate(15%,0%); }
+      70% { transform: translate(0%,15%); }
+      80% { transform: translate(3%,35%); }
+      90% { transform: translate(-10%,10%); }
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: var(--bone);
+      border-bottom: 1px solid transparent;
+      transition: border-color 500ms ease;
+    }
+    nav.scrolled { border-bottom-color: var(--divider); }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .nav-en {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      padding: 160px 40px 80px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .page-title {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.2;
+    }
+
+    /* ── Ink divider ── */
+    .ink-rule {
+      border: none;
+      height: 20px;
+      max-width: 680px;
+      margin: 0 auto;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 20' preserveAspectRatio='none'%3E%3Cpath d='M 10,10 C 90,8.2 170,11.8 260,9.4 C 350,7 430,12.6 510,10.2 C 590,8 640,11 670,10' stroke='%232C2825' stroke-width='0.7' fill='none' opacity='0.15' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+    }
+
+    /* ── FAQ items ── */
+    .faqs {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 80px 40px 120px;
+    }
+
+    .faq {
+      margin-bottom: 60px;
+    }
+    .faq:last-child { margin-bottom: 0; }
+
+    .faq-q {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .faq-a {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.85;
+    }
+
+    /* ── Scroll fade-in ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 28px 48px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .footer-link {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 350ms ease;
+    }
+    .footer-link:hover { color: var(--terracotta); }
+    .footer-link-cta { color: var(--terracotta); }
+    .footer-link-cta:hover { opacity: 0.75; color: var(--terracotta); }
+    .footer-copy {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      opacity: 0.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      nav { padding: 20px 24px; }
+      .page-header { padding: 140px 24px 60px; }
+      .page-title { font-size: 36px; }
+      .faqs { padding: 60px 24px 80px; }
+      footer { padding: 24px 24px 32px; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav id="main-nav">
+    <a class="nav-logo" href="com_page.html">
+      <svg viewBox="0 0 130 110" width="52" height="44" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 76,24 C 95,31 98,49 97,61 C 96,84 80,100 54,100 C 28,100 12,84 12,61 C 12,49 16,31 34,24"
+              stroke="#C07856" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <text x="55" y="24" font-family="'Pinyon Script', cursive" font-size="22"
+              fill="#C07856" text-anchor="middle" dominant-baseline="middle">of</text>
+      </svg>
+      <span class="nav-en">En.</span>
+    </a>
+  </nav>
+
+
+  <!-- ── Page header ── -->
+  <div class="page-header fade-in">
+    <span class="page-eyebrow">The Circle</span>
+    <h1 class="page-title">Frequently asked questions</h1>
+  </div>
+
+
+  <!-- ── FAQs ── -->
+  <hr class="ink-rule" />
+
+  <div class="faqs">
+
+    <div class="faq fade-in">
+      <h2 class="faq-q">Is each En anonymous?</h2>
+      <p class="faq-a">Completely. There are no profiles, no names, and no way to trace an En back to the person who wrote it. Your identity in the circle is a simple code stored in your browser; nothing more. The anonymity isn't incidental. It's the design. The gift only works because neither person knows the other.</p>
+    </div>
+
+    <div class="faq fade-in">
+      <h2 class="faq-q">How are Ens matched?</h2>
+      <p class="faq-a">Each En is matched to a moment, not a person. You describe where you are; the circle looks for something left by someone who has already lived through it. Technology serves the connection. The warmth comes entirely from the human who wrote it.</p>
+    </div>
+
+    <div class="faq fade-in">
+      <h2 class="faq-q">Why do I need to leave an En first?</h2>
+      <p class="faq-a">Because the circle only moves when people give as well as receive. But more than mechanics; the act of writing for someone else before you receive anything yourself changes what you eventually receive. You arrive already having offered something. That matters.</p>
+    </div>
+
+    <div class="faq fade-in">
+      <h2 class="faq-q">Why can't I endlessly scroll?</h2>
+      <p class="faq-a">Because an En is not content to consume. There is a daily limit on receiving, not to restrict access, but to protect the meaning of what arrives. Let this one settle. Come back tomorrow.</p>
+    </div>
+
+    <div class="faq fade-in">
+      <h2 class="faq-q">Can I respond to someone?</h2>
+      <p class="faq-a">No. There are no replies, no reactions, no way to reach the person who left you an En. This is not an oversight; it is the design. The distance between giver and receiver is what makes the offering possible. A message from a stranger, left with no expectation of acknowledgment, lands differently than anything connected to a thread.</p>
+    </div>
+
+    <div class="faq fade-in">
+      <h2 class="faq-q">What happens to harmful messages?</h2>
+      <p class="faq-a">Every En passes through a moderation layer before it enters the circle. Messages that contain harm or cruelty are removed before they reach anyone. If something arrives that doesn't belong, you can flag it. The circle is a small, protected space; keeping it that way is everyone's responsibility.</p>
+    </div>
+
+    <div class="faq fade-in">
+      <h2 class="faq-q">Who is Circle of En for?</h2>
+      <p class="faq-a">Anyone who has been through something and come out the other side with something to offer. And anyone who is in the middle of something right now. Which, at different moments, is most of us.</p>
+    </div>
+
+  </div>
+
+
+  <div style="text-align:center; padding: 0 40px 80px;">
+    <a href="com_page.html" style="font-family:var(--serif); font-size:15px; font-weight:300; font-style:italic; color:var(--muted); text-decoration:none; transition: color 350ms ease;"
+       onmouseover="this.style.color='var(--terracotta)'"
+       onmouseout="this.style.color='var(--muted)'">← back to the circle</a>
+  </div>
+
+  <!-- ── Footer ──-->
+  <footer>
+    <div class="footer-links">
+      <a class="footer-link" href="community_principles.html">Community Principles</a>
+      <a class="footer-link" href="faq.html">FAQ</a>
+      <a class="footer-link" href="contact.html">Contact</a>
+      <a class="footer-link footer-link-cta" href="prototype.html">♡ Offer an En</a>
+    </div>
+    <p class="footer-copy">Circle of En © 2026</p>
+  </footer>
+
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = `${i * 80}ms`;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/en-site/"
+title = "Circle of En — Site"
+version = "1.0.0"
+id = "artifacts/en-site"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/en-site/" ]
+localPort = 18428
+
+[services.development]
+run = "pnpm --filter @workspace/en-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/en-site", "run", "build" ]
+publicDir = "artifacts/en-site/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18428"
+BASE_PATH = "/en-site/"

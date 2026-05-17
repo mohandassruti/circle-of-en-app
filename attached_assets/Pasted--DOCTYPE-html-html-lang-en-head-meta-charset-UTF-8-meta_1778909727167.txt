@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Circle of En</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bone:       #FAF8F4;
+      --cream:      #F5F0E8;
+      --stone:      #EAE4DA;
+      --charcoal:   #2C2825;
+      --graphite:   #4A4540;
+      --muted:      #8A837C;
+      --terracotta: #C07856;
+      --amber:      #C9975E;
+      --sage:       #7A9E7E;
+      --divider:    rgba(44,40,37,0.10);
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+      --script:     'Pinyon Script', cursive;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bone);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #app {
+      min-height: 100vh;
+      max-width: 440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Screens ── */
+    .screen {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .screen.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ══════════════════════════════════
+       FULL LOGO COMPONENT
+       circle + "of" in gap + En.
+    ══════════════════════════════════ */
+
+    /* Nav bar */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 28px 0;
+    }
+
+    .nav-logo { cursor: pointer; }
+
+    /* Hero logo — large, centered */
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 44px;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.03); }
+    }
+
+    .hero-en {
+      font-family: var(--serif);
+      font-size: 64px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Nav count ── */
+    .nav-count {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--muted);
+    }
+
+    /* ── Shared inner layout ── */
+    .screen-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 28px 40px;
+    }
+
+    .back-btn {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      margin-bottom: 40px;
+      transition: color 200ms ease;
+      text-align: left;
+    }
+    .back-btn:hover { color: var(--terracotta); }
+
+    .screen-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 10px;
+    }
+
+    .screen-title {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .screen-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      width: 100%;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 17px 32px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+    .btn-primary:hover  { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-secondary {
+      width: 100%;
+      background: transparent;
+      color: var(--graphite);
+      border: 1px solid rgba(44,40,37,0.20);
+      border-radius: 100px;
+      padding: 16px 32px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: border-color 200ms ease, color 200ms ease;
+    }
+    .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
+
+    .btn-ghost {
+      background: transparent;
+      border: none;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 8px 0;
+      letter-spacing: 0.04em;
+      transition: color 200ms ease;
+      width: 100%;
+      text-align: center;
+    }
+    .btn-ghost:hover { color: var(--terracotta); }
+
+    /* ── Find link — the quiet secondary ── */
+    .find-link {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 14px 0 0;
+      transition: color 200ms ease;
+      letter-spacing: 0.02em;
+      background: none;
+      border: none;
+      width: 100%;
+    }
+    .find-link:hover { color: var(--terracotta); }
+    .find-link em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 15px;
+    }
+
+    /* ── Tags ── */
+    .tag-section-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .tags-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .tag-chip {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--charcoal);
+      background: var(--cream);
+      border: 1px solid rgba(44,40,37,0.18);
+      border-radius: 100px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background 200ms, border-color 200ms, color 200ms;
+      line-height: 1;
+      user-select: none;
+    }
+    .tag-chip:hover  { border-color: var(--terracotta); color: var(--terracotta); }
+    .tag-chip.active { background: var(--terracotta); border-color: var(--terracotta); color: white; }
+
+    /* ── Textarea ── */
+    .text-area-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      flex: 1;
+      min-height: 180px;
+      background: var(--cream);
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 20px;
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.65;
+      resize: none;
+      outline: none;
+      transition: border-color 200ms ease;
+    }
+    textarea:focus { border-color: rgba(192,120,86,0.35); }
+    textarea::placeholder { color: var(--muted); font-style: italic; }
+
+    .char-count {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+      margin-top: 8px;
+    }
+
+    /* ── Confirmation ── */
+    .confirm-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 36px;
+      text-align: center;
+    }
+
+    .confirm-mark {
+      margin-bottom: 36px;
+    }
+
+    /* The circle breathes and shifts from terracotta → sage */
+    .confirm-circle-path {
+      animation: circle-given 2.4s ease forwards;
+    }
+    @keyframes circle-given {
+      0%   { stroke: #C07856; transform: scale(1);    transform-origin: 54px 62px; }
+      30%  { stroke: #C07856; transform: scale(1.10); transform-origin: 54px 62px; }
+      60%  { stroke: #9BBF9E; transform: scale(1.04); transform-origin: 54px 62px; }
+      100% { stroke: #7A9E7E; transform: scale(1);    transform-origin: 54px 62px; }
+    }
+
+    .confirm-headline {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .confirm-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.75;
+      max-width: 280px;
+      margin-bottom: 48px;
+    }
+
+    .confirm-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    /* ── En card — the heart of the product ── */
+    .en-card {
+      background: var(--cream);
+      border-radius: 12px;
+      border: 1px solid var(--divider);
+      padding: 44px 36px;
+      margin-bottom: 10px;
+      animation: fadeIn 0.65s ease forwards;
+    }
+
+    .en-message {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1.65;
+      /* No italic. Weight carries it. */
+    }
+
+    .en-found-you {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .en-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    /* ── Daily limit ── */
+    .limit-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 36px;
+      text-align: center;
+    }
+
+    .limit-mark { margin-bottom: 32px; opacity: 0.4; }
+
+    .limit-headline {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .limit-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.75;
+      max-width: 260px;
+      margin-bottom: 40px;
+    }
+
+    .limit-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    /* ── Stats bar ── */
+    .rule { border: none; border-top: 1px solid var(--divider); margin: 0 28px; }
+
+    .stats-bar {
+      padding: 18px 28px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-value {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 5px;
+    }
+
+    .stat-pipe {
+      width: 1px;
+      height: 32px;
+      background: var(--divider);
+    }
+
+    /* ── Hero layout ── */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 36px 32px;
+      text-align: center;
+    }
+
+    .hero-line {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--graphite);
+      line-height: 1.5;
+      text-align: center;
+      max-width: 280px;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    /* ── Prototype nav ── */
+    .proto-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 440px;
+      background: var(--charcoal);
+      padding: 10px 16px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      z-index: 100;
+      overflow-x: auto;
+    }
+
+    .proto-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250,248,244,0.35);
+      margin-right: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .proto-btn {
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(250,248,244,0.6);
+      background: rgba(250,248,244,0.07);
+      border: 1px solid rgba(250,248,244,0.10);
+      border-radius: 100px;
+      padding: 5px 11px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 150ms, color 150ms, border-color 150ms;
+    }
+    .proto-btn:hover  { background: rgba(192,120,86,0.2); color: #FAF8F4; border-color: var(--terracotta); }
+    .proto-btn.active { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+
+    .spacer-bottom { height: 52px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+
+  <!-- ══════════════════════════════════════
+       SCREEN 1 · Home / Landing
+  ══════════════════════════════════════ -->
+  <div class="screen active" id="screen-home">
+
+    <div class="nav" style="justify-content:flex-end;">
+      <span class="nav-count" id="home-nav-count"></span>
+    </div>
+
+    <div class="hero">
+
+      <!-- Full logo: circle + of + En. -->
+      <div class="hero-logo">
+        <svg viewBox="0 0 130 110" width="130" height="110" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 76,24 C 95,31 98,49 97,61 C 96,84 80,100 54,100 C 28,100 12,84 12,61 C 12,49 16,31 34,24"
+                stroke="#C07856" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <text x="55" y="24" font-family="'Pinyon Script', cursive" font-size="22"
+                fill="#C07856" text-anchor="middle" dominant-baseline="middle">of</text>
+        </svg>
+        <span class="hero-en">En.</span>
+      </div>
+
+      <p class="hero-line">What held you once will hold somebody through theirs.</p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="show('screen-give')">Leave an En</button>
+        <!-- Only shown to returning members who have given at least once -->
+        <button class="find-link" id="find-link" onclick="show('screen-receive-tag')" style="display:none;">somebody left something for you <em>→</em></button>
+      </div>
+    </div>
+
+    <hr class="rule" />
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-value">2,841</span>
+        <span class="stat-label">in the circle</span>
+      </div>
+      <div class="stat-pipe"></div>
+      <div class="stat">
+        <span class="stat-value" id="stat-given">0</span>
+        <span class="stat-label">given by you</span>
+      </div>
+      <div class="stat-pipe"></div>
+      <div class="stat">
+        <span class="stat-value" id="stat-received">0</span>
+        <span class="stat-label">received by you</span>
+      </div>
+    </div>
+
+    <a href="com_page.html" target="_blank"
+       style="display:block; text-align:center; font-size:11px; font-weight:300;
+              color:var(--muted); text-decoration:none; padding: 10px 0 16px;
+              letter-spacing:0.06em; transition: color 200ms ease;"
+       onmouseover="this.style.color='var(--terracotta)'"
+       onmouseout="this.style.color='var(--muted)'">about the circle</a>
+
+    <div class="spacer-bottom"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SCREEN 2 · Leave an En — write
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-give">
+
+    <div class="nav">
+      <!-- Full logo, small -->
+      <div class="nav-logo" onclick="show('screen-home')">
+        <svg viewBox="0 0 160 55" width="120" height="42" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 38,12 C 48,16 49,25 48,31 C 47,42 40,50 27,50 C 14,50 6,42 6,31 C 6,25 7,16 17,12"
+                stroke="#C07856" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <text x="27" y="12" font-family="'Pinyon Script', cursive" font-size="11"
+                fill="#C07856" text-anchor="middle" dominant-baseline="middle">of</text>
+          <text x="60" y="33" font-family="'Cormorant Garamond', Georgia, serif"
+                font-size="28" font-weight="400" fill="#2C2825" dominant-baseline="middle">En.</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="screen-inner">
+      <button class="back-btn" onclick="show('screen-home')">← back</button>
+
+      <p class="screen-eyebrow">Leave an En</p>
+      <h2 class="screen-title">Leave behind what you once needed</h2>
+      <p class="screen-desc">Someone else might arrive here tomorrow carrying what you once carried.</p>
+
+      <p class="tag-section-label">Their moment</p>
+      <div class="tags-wrap" id="give-tags">
+        <span class="tag-chip" onclick="toggleTag(this)">just laid off</span>
+        <span class="tag-chip" onclick="toggleTag(this)">interview rejection</span>
+        <span class="tag-chip" onclick="toggleTag(this)">endless job hunting</span>
+        <span class="tag-chip" onclick="toggleTag(this)">big presentation</span>
+        <span class="tag-chip" onclick="toggleTag(this)">burnt out</span>
+        <span class="tag-chip" onclick="toggleTag(this)">quietly proud</span>
+        <span class="tag-chip" onclick="toggleTag(this)">stretched thin</span>
+        <span class="tag-chip" onclick="toggleTag(this)">nailed it</span>
+      </div>
+
+      <div class="text-area-wrap">
+        <textarea id="give-text" maxlength="400"
+          placeholder="What do you wish someone told you in this moment…"
+          oninput="updateCount()"></textarea>
+        <span class="char-count" id="char-count">400 characters left</span>
+      </div>
+
+      <button class="btn-primary" onclick="submitGive()">Offer this En</button>
+    </div>
+    <div class="spacer-bottom"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SCREEN 3 · En left — confirmation
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-given">
+    <div class="confirm-center">
+
+      <div class="confirm-mark">
+        <svg viewBox="0 0 110 110" width="88" height="88" xmlns="http://www.w3.org/2000/svg">
+          <path class="confirm-circle-path"
+                d="M 76,24 C 95,31 98,49 97,61 C 96,84 80,100 54,100 C 28,100 12,84 12,61 C 12,49 16,31 34,24"
+                stroke="#C07856" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+
+      <h2 class="confirm-headline">your En is in the circle</h2>
+      <p class="confirm-sub">Someone is on their way to this moment. They just don't know it yet.</p>
+
+      <div class="confirm-actions">
+        <button class="btn-primary" onclick="show('screen-receive-tag')">Find my En</button>
+        <button class="btn-ghost" onclick="show('screen-home')">return home</button>
+      </div>
+    </div>
+    <div class="spacer-bottom"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SCREEN 4 · Find — choose your moment
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-receive-tag">
+
+    <div class="nav">
+      <div class="nav-logo" onclick="show('screen-home')">
+        <svg viewBox="0 0 160 55" width="120" height="42" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 38,12 C 48,16 49,25 48,31 C 47,42 40,50 27,50 C 14,50 6,42 6,31 C 6,25 7,16 17,12"
+                stroke="#C07856" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <text x="27" y="12" font-family="'Pinyon Script', cursive" font-size="11"
+                fill="#C07856" text-anchor="middle" dominant-baseline="middle">of</text>
+          <text x="60" y="33" font-family="'Cormorant Garamond', Georgia, serif"
+                font-size="28" font-weight="400" fill="#2C2825" dominant-baseline="middle">En.</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="screen-inner">
+      <button class="back-btn" onclick="show('screen-home')">← back</button>
+
+      <p class="screen-eyebrow">Find an En</p>
+      <h2 class="screen-title">What moment are you standing in now</h2>
+      <p class="screen-desc">Someone once stood here too.</p>
+
+      <p class="tag-section-label">Your moment</p>
+      <div class="tags-wrap" id="receive-tags">
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">just laid off</span>
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">interview rejection</span>
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">endless job hunting</span>
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">big presentation</span>
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">burnt out</span>
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">quietly proud</span>
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">stretched thin</span>
+        <span class="tag-chip" onclick="toggleReceiveTag(this)">nailed it</span>
+      </div>
+
+      <div style="flex:1;"></div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <button class="btn-primary" onclick="show('screen-en')">Open my En</button>
+        <button class="btn-secondary" onclick="show('screen-en')">let the circle decide</button>
+      </div>
+    </div>
+    <div class="spacer-bottom"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SCREEN 5 · The En arrives
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-en">
+
+    <div class="nav">
+      <div class="nav-logo" onclick="show('screen-home')">
+        <svg viewBox="0 0 160 55" width="120" height="42" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 38,12 C 48,16 49,25 48,31 C 47,42 40,50 27,50 C 14,50 6,42 6,31 C 6,25 7,16 17,12"
+                stroke="#C07856" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <text x="27" y="12" font-family="'Pinyon Script', cursive" font-size="11"
+                fill="#C07856" text-anchor="middle" dominant-baseline="middle">of</text>
+          <text x="60" y="33" font-family="'Cormorant Garamond', Georgia, serif"
+                font-size="28" font-weight="400" fill="#2C2825" dominant-baseline="middle">En.</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="screen-inner" style="justify-content:center;">
+
+      <!-- Subtle "An En found you" — script, muted, just a whisper -->
+      <span class="en-found-you">an En found you…</span>
+
+      <!-- The En. Nothing else in this card. -->
+      <div class="en-card">
+        <p class="en-message" id="en-text">
+          You are not behind. You have never been behind. You are exactly where someone who has done the things you have done would be.
+        </p>
+      </div>
+
+      <div class="en-actions">
+        <button class="btn-primary" onclick="carryThis()">Carry this with me</button>
+        <button class="btn-ghost" onclick="show('screen-home')">return home</button>
+      </div>
+
+    </div>
+    <div class="spacer-bottom"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SCREEN 6 · Daily limit
+  ══════════════════════════════════════ -->
+  <div class="screen" id="screen-limit">
+    <div class="limit-center">
+
+      <div class="limit-mark">
+        <svg viewBox="0 0 110 110" width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 76,24 C 95,31 98,49 97,61 C 96,84 80,100 54,100 C 28,100 12,84 12,61 C 12,49 16,31 34,24"
+                stroke="#C07856" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+
+      <h2 class="limit-headline">let this one settle</h2>
+      <p class="limit-sub">The circle will be here for you tomorrow. Some things take a little time to land.</p>
+
+      <div class="limit-actions">
+        <button class="btn-primary" onclick="show('screen-give')">Leave an En instead</button>
+        <button class="btn-ghost" onclick="show('screen-home')">return home</button>
+      </div>
+    </div>
+    <div class="spacer-bottom"></div>
+  </div>
+
+
+</div><!-- /app -->
+
+<!-- Prototype navigation bar -->
+<div class="proto-nav">
+  <span class="proto-label">screens</span>
+  <button class="proto-btn active" onclick="setHomeState('first'); show('screen-home'); setActive(this)">Home · first visit</button>
+  <button class="proto-btn" onclick="setHomeState('returning'); show('screen-home'); setActive(this)">Home · returning</button>
+  <button class="proto-btn" onclick="show('screen-give'); setActive(this)">Leave</button>
+  <button class="proto-btn" onclick="show('screen-given'); setActive(this)">Confirmed</button>
+  <button class="proto-btn" onclick="show('screen-receive-tag'); setActive(this)">Find</button>
+  <button class="proto-btn" onclick="show('screen-en'); setActive(this)">En arrives</button>
+  <button class="proto-btn" onclick="show('screen-limit'); setActive(this)">Limit</button>
+</div>
+
+<script>
+  function setHomeState(state) {
+    const findLink    = document.getElementById('find-link');
+    const navCount    = document.getElementById('home-nav-count');
+    const statGiven   = document.getElementById('stat-given');
+    const statReceived= document.getElementById('stat-received');
+
+    if (state === 'returning') {
+      findLink.style.display = 'block';
+      navCount.textContent   = '4 given · 2 received';
+      statGiven.textContent  = '4';
+      statReceived.textContent = '2';
+    } else {
+      findLink.style.display = 'none';
+      navCount.textContent   = '';
+      statGiven.textContent  = '0';
+      statReceived.textContent = '0';
+    }
+  }
+
+  // Default to first-visit state on load
+  setHomeState('first');
+
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+    const map = {
+      'screen-home':0,'screen-give':1,'screen-given':2,
+      'screen-receive-tag':3,'screen-en':4,'screen-limit':5
+    };
+    const btns = document.querySelectorAll('.proto-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    if (map[id] !== undefined) btns[map[id]].classList.add('active');
+  }
+
+  function setActive(el) {
+    document.querySelectorAll('.proto-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function toggleTag(el) { el.classList.toggle('active'); }
+
+  function toggleReceiveTag(el) {
+    document.querySelectorAll('#receive-tags .tag-chip').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function updateCount() {
+    const ta = document.getElementById('give-text');
+    document.getElementById('char-count').textContent = (400 - ta.value.length) + ' characters left';
+  }
+
+  function submitGive() {
+    const text = document.getElementById('give-text').value.trim();
+    if (!text) {
+      document.getElementById('give-text').focus();
+      return;
+    }
+    show('screen-given');
+    document.getElementById('give-text').value = '';
+    document.querySelectorAll('#give-tags .tag-chip').forEach(t => t.classList.remove('active'));
+    updateCount();
+  }
+
+  const sampleEns = [
+    { text: 'You are not behind. You have never been behind. You are exactly where someone who has done the things you have done would be.' },
+    { text: 'The room tomorrow is just a room. You have survived harder rooms inside your own head at 3am.' },
+    { text: 'A rejection is not a verdict. It is one person\'s read on one day. It says nothing permanent about you.' },
+    { text: 'The job you lost was not the last one. It was just the most recent one. There is a difference.' },
+    { text: 'You do not have to be fine. You just have to get through this one day. That is the whole job right now.' },
+  ];
+
+  function carryThis() { show('screen-home'); }
+</script>
+</body>
+</html>

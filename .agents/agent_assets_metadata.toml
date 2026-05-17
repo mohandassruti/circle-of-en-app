@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "JjumaEbfdgLaI2aoEjxRz"
+uri = "file://circleofen-site.zip"
+type = "unspecified"
+title = "circleofen.com — marketing pages"

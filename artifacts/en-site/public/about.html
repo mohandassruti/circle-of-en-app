@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circle of En</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=Dancing+Script:wght@500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bone:       #FAF8F4;
+      --cream:      #F5F0E8;
+      --stone:      #EAE4DA;
+      --charcoal:   #2C2825;
+      --graphite:   #4A4540;
+      --muted:      #8A837C;
+      --terracotta: #C07856;
+      --amber:      #C9975E;
+      --sage:       #7A9E7E;
+      --divider:    rgba(44,40,37,0.10);
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+      --script:     'Pinyon Script', cursive;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bone);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: var(--bone);
+      border-bottom: 1px solid transparent;
+      transition: border-color 500ms ease;
+    }
+    nav.scrolled { border-bottom-color: var(--divider); }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      text-decoration: none;
+    }
+    .nav-en {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Sections ── */
+    section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    section.wide { max-width: 860px; }
+
+    /* ── Hero ── */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 140px;
+      padding-bottom: 100px;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 48px;
+      animation: breathe 6s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.025); }
+    }
+
+    .hero-en {
+      font-family: var(--serif);
+      font-size: 72px;
+      font-weight: 400;
+      color: var(--charcoal);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--graphite);
+      line-height: 1.55;
+      max-width: 480px;
+      margin-bottom: 52px;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 18px 44px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.10em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 400ms ease, transform 400ms ease;
+    }
+    .btn-cta:hover  { opacity: 0.88; transform: translateY(-1px); }
+    .btn-cta:active { transform: translateY(0); }
+
+    .btn-subtext {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 14px;
+      font-style: italic;
+      font-family: var(--serif);
+    }
+
+    /* ── Dividers ── */
+    hr.section-rule {
+      border: none;
+      height: 20px;
+      max-width: 680px;
+      margin: 0 auto;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 20' preserveAspectRatio='none'%3E%3Cpath d='M 10,10 C 90,8.2 170,11.8 260,9.4 C 350,7 430,12.6 510,10.2 C 590,8 640,11 670,10' stroke='%232C2825' stroke-width='0.7' fill='none' opacity='0.15' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+    }
+
+    /* ── Observation ── */
+    .observation-section { padding-top: 120px; padding-bottom: 120px; }
+    .observation-text {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.7;
+    }
+    .observation-text p + p { margin-top: 18px; }
+
+    /* ── En Character ── */
+    .en-section {
+      padding-top: 120px;
+      padding-bottom: 120px;
+      text-align: center;
+      position: relative;
+    }
+    .en-section::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 1.5px solid var(--terracotta);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .en-section::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-47%, -53%);
+      width: 360px; height: 380px;
+      border-radius: 50%;
+      border: 1px solid var(--terracotta);
+      opacity: 0.10;
+      pointer-events: none;
+    }
+
+    .en-kanji {
+      font-family: var(--serif);
+      font-size: 96px;
+      font-weight: 300;
+      color: var(--terracotta);
+      line-height: 1;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .en-pronunciation {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 40px;
+      letter-spacing: 0.06em;
+    }
+    .en-copy {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.85;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .en-copy p + p { margin-top: 28px; }
+
+    /* ── How it works ── */
+    .how-section { padding-top: 120px; padding-bottom: 120px; }
+    .how-text {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+    .how-text p + p { margin-top: 36px; }
+
+    /* ── Founder ── */
+    .founder-section { padding-top: 120px; padding-bottom: 120px; }
+    .founder-inner {
+      background: var(--cream);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: 56px 60px;
+      box-shadow: 0 12px 80px rgba(44,40,37,0.05), 0 2px 12px rgba(44,40,37,0.03);
+    }
+    .founder-eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+      display: block;
+    }
+    .founder-text {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--graphite);
+      line-height: 1.85;
+    }
+    .founder-text p + p { margin-top: 24px; }
+    .founder-sig {
+      margin-top: 40px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--charcoal);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--divider);
+      padding: 28px 48px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .footer-link {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 350ms ease;
+    }
+    .footer-link:hover { color: var(--terracotta); }
+    .footer-link-cta { color: var(--terracotta); }
+    .footer-link-cta:hover { opacity: 0.75; color: var(--terracotta); }
+    .footer-copy {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      opacity: 0.6;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -50%;
+      width: 200%; height: 200%;
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9998;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 8s steps(10) infinite;
+    }
+    @keyframes grain {
+      0%,100% { transform: translate(0,0); }
+      10% { transform: translate(-5%,-10%); }
+      20% { transform: translate(-15%,5%); }
+      30% { transform: translate(7%,-25%); }
+      40% { transform: translate(-5%,25%); }
+      50% { transform: translate(-15%,10%); }
+      60% { transform: translate(15%,0%); }
+      70% { transform: translate(0%,15%); }
+      80% { transform: translate(3%,35%); }
+      90% { transform: translate(-10%,10%); }
+    }
+
+    /* ── Scroll fade-in ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      nav { padding: 20px 24px; }
+      section { padding: 0 24px; }
+      .hero-en { font-size: 60px; }
+      .hero-tagline { font-size: 18px; }
+      .observation-text { font-size: 18px; }
+      .en-kanji { font-size: 72px; }
+      .en-copy { font-size: 17px; }
+      .how-text { font-size: 18px; }
+      .founder-inner { padding: 40px 32px; }
+      footer { padding: 24px 24px 32px; }
+      .footer-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav id="main-nav">
+    <a class="nav-logo" href="about.html">
+      <svg viewBox="0 0 130 110" width="52" height="44" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 76,24 C 95,31 98,49 97,61 C 96,84 80,100 54,100 C 28,100 12,84 12,61 C 12,49 16,31 34,24"
+              stroke="#C07856" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <text x="55" y="24" font-family="'Pinyon Script', cursive" font-size="22"
+              fill="#C07856" text-anchor="middle" dominant-baseline="middle">of</text>
+      </svg>
+      <span class="nav-en">En.</span>
+    </a>
+  </nav>
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="hero-section" style="position:relative;">
+    <div class="hero-logo">
+      <svg viewBox="0 0 130 110" width="180" height="152" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 76,24 C 95,31 98,49 97,61 C 96,84 80,100 54,100 C 28,100 12,84 12,61 C 12,49 16,31 34,24"
+              stroke="#C07856" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <text x="55" y="24" font-family="'Pinyon Script', cursive" font-size="22"
+              fill="#C07856" text-anchor="middle" dominant-baseline="middle">of</text>
+      </svg>
+      <span class="hero-en">En.</span>
+    </div>
+
+    <p class="hero-tagline">A quiet human exchange between people who have stood in similar moments.</p>
+
+    <a id="main-cta" class="btn-cta" href="https://circleofen.app/prototype.html">Receive your En →</a>
+    <p id="cta-subtext" class="btn-subtext">No sign-up. No explanation. Just open it.</p>
+  </section>
+  <script>
+    (function () {
+      var cta = document.getElementById('main-cta');
+      var sub = document.getElementById('cta-subtext');
+      if (localStorage.getItem('coe_visited')) {
+        cta.textContent = 'Offer an En. Receive one back.';
+        sub.textContent = 'Leave the En you once needed.';
+      }
+      cta.addEventListener('click', function () {
+        localStorage.setItem('coe_visited', '1');
+      });
+    })();
+  </script>
+
+  <!-- ══════════════════════ OBSERVATION ══════════════════════ -->
+  <hr class="section-rule" />
+  <section class="observation-section fade-in">
+    <div class="observation-text">
+      <p>Modern life leaves very little room for emotional stillness.</p>
+      <p>Sometimes what changes a difficult moment is not advice.</p>
+      <p>It is hearing from someone who has quietly survived something similar.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ 縁 — EN ══════════════════════ -->
+  <hr class="section-rule" />
+  <section class="en-section fade-in">
+    <span class="en-kanji">縁</span>
+    <span class="en-pronunciation">En.</span>
+    <div class="en-copy">
+      <p>En (縁) is a Japanese concept describing the meaningful connections and encounters that emerge through life's timing and circumstances.</p>
+      <p>Not quite fate or destiny, but the quiet feeling that certain people, moments, or crossings arrive exactly when they are needed.</p>
+      <p>Within Circle of En, an En is a small offering from one human to another; shared anonymously through words, and carried forward through the Circle.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ HOW IT WORKS ══════════════════════ -->
+  <hr class="section-rule" />
+  <section class="how-section fade-in">
+    <div class="how-text">
+      <p>Circle of En is a quiet place where people leave behind the En they once needed.</p>
+      <p>Each En is written for someone entering a moment the writer has already lived through.</p>
+      <p>The Circle moves through reciprocity.</p>
+      <p>Before receiving an En of your own, you first leave one for someone else.</p>
+      <p>In this way, strangers become connected through moments they may never share aloud, yet somehow still understand.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FOUNDER ══════════════════════ -->
+  <hr class="section-rule" />
+  <section class="founder-section fade-in">
+    <div class="founder-inner">
+      <span class="founder-eyebrow">A note from the founder</span>
+      <div class="founder-text">
+        <p>Circle of En came from a simple observation: many of the moments that shape us most are also the moments we move through most privately.</p>
+        <p>I began thinking about whether technology could create something quieter; not another place to perform or consume, but a space where human experiences could gently find one another through shared moments.</p>
+        <p>So much of modern life asks us to move through the world as individuals; defined by our roles, our ambitions, our opinions, the versions of ourselves we learn to present outwardly. But beneath all of that, human experience is often far less separate than it appears.</p>
+        <p>Many of the moments we believe we are carrying alone are, in some form, shared by countless others too.</p>
+        <p>Every En within the Circle is written by a real person; someone, somewhere, who once stood in a similar moment. Technology simply helps protect the space and guide each En toward the person who may need it most.</p>
+        <p>Circle of En was created as a quieter kind of space; a place where people can leave behind the En they once needed, and where moments of encouragement, steadiness, and human connection can find someone exactly when they need it most.</p>
+      </div>
+      <div class="founder-sig">— Sruti</div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FOOTER ══════════════════════ -->
+  <footer>
+    <div class="footer-links">
+      <a class="footer-link" href="community_principles.html">Community Principles</a>
+      <a class="footer-link" href="faq.html">FAQ</a>
+      <a class="footer-link" href="contact.html">Contact</a>
+      <a class="footer-link footer-link-cta" href="https://circleofen.app/prototype.html">♡ Receive your En</a>
+    </div>
+    <p class="footer-copy">Circle of En © 2026</p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+  </script>
+
+</body>
+</html>
